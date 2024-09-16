@@ -1,0 +1,6 @@
+{
+    "trailingComma": "none",
+    "useTabs": true,
+    "printWidth": 70,
+    "breakBeforeElse": true
+}

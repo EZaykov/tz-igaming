@@ -1,0 +1,7 @@
+@startuml
+class UserNumber<<Entity>> {
+    +id: string;
+    +value: string;
+    +ttl: number;
+}
+@enduml
