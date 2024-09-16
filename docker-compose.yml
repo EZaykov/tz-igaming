@@ -1,0 +1,38 @@
+version: "3.8"
+networks:
+  igaming:
+    driver: bridge
+    external: false
+services:
+  app:
+    image: altqq/tz-igaming:0.0.3
+    container_name: app
+    ports:
+      - 443:443
+    networks:
+      - igaming
+    volumes:
+      - ~/cert:/usr/app/cert
+    env_file:
+      - .env.production
+  redis:
+    image: "redis:alpine"
+    container_name: redis
+    restart: unless-stopped
+    ports:
+      - 6379:6379
+    networks:
+      - igaming
+  postgres:
+    image: postgres:16.4
+    container_name: postgres
+    volumes:
+      - ~/db/init.sql:/docker-entrypoint-initdb.d/init.sql
+    environment:
+      POSTGRES_PASSWORD: mysecretpassword
+      POSTGRES_DB: postgres
+    ports:
+      - 5432:5432
+    restart: unless-stopped
+    networks:
+      - igaming

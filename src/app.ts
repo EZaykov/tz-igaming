@@ -2,12 +2,12 @@ import { server } from "./application/server";
 import { pg } from "./db";
 
 server.listen({
-	port: 3500,
+	port: process.env.PORT,
 	...(process.env.NODE_ENV === "production"
 		? {
-				key: Bun.file("./cert/key.pem"),
-				cert: Bun.file("./cert/cert.pem"),
-				passphrase: "zx18346zx"
+				key: Bun.file("/usr/app/cert/key.pem"),
+				cert: Bun.file("/usr/app/cert/cert.pem"),
+				passphrase: process.env.TLS_PASSPHRASE
 		  }
 		: {})
 });
