@@ -14,5 +14,7 @@ declare module "bun" {
 		REDIS_USER: string;
 		REDIS_PASSWORD: string;
 		TLS_PASSPHRASE: string;
+		CRON_TTL_IN_SECONDS: string;
+		CRON_INTERVAL_IN_SECONDS: string;
 	}
 }

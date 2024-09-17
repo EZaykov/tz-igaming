@@ -6,11 +6,6 @@ const redis_url = new URL(
 	`redis://${process.env.REDIS_HOST}:${process.env.REDIS_PORT}`
 );
 
-// if (process.env.NODE_ENV === "production") {
-// 	redis_url.username = process.env.REDIS_USER;
-// 	redis_url.password = process.env.REDIS_PASSWORD;
-// }
-
 // sync client
 // fail fast
 // autoconnect

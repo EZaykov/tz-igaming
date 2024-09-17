@@ -1,4 +1,4 @@
-import { Elysia, t } from "elysia";
+import { Elysia } from "elysia";
 import { html } from "@elysiajs/html";
 
 export const miniApp = new Elysia().use(html()).get(
@@ -24,7 +24,9 @@ export const miniApp = new Elysia().use(html()).get(
                             tgUsernameElem.innerText = '';
                             tgIdElem.innerText = '';
 
-                            const tgUserData = await fetch("https://${process.env.HOST}/v1/me")
+                            const tgUserData = await fetch("https://${
+															process.env.HOST
+														}/v1/me")
                                 .then(res => res.json());
 
                             tgUsernameElem.innerText = 'tg_username: ' + tgUserData.tg_username;
@@ -40,12 +42,16 @@ export const miniApp = new Elysia().use(html()).get(
                             const userNumber =  data.get('userNumberInput');
                             const now = new Date();
                             const expiresAt = new Date(
-                                now.setSeconds(now.getSeconds() + 10)
+                                now.setSeconds(now.getSeconds() + ${Number.parseInt(
+																	process.env.CRON_TTL_IN_SECONDS
+																)})
                             ).toISOString();
                             
                             document.querySelector('#userNumberInput').value = "";
 
-                            fetch("https://${process.env.HOST}/v1/endpoint", {
+                            fetch("https://${
+															process.env.HOST
+														}/v1/endpoint", {
                                 method: "POST",
                                 body: JSON.stringify({
                                     value: parseInt(userNumber),
@@ -64,10 +70,12 @@ export const miniApp = new Elysia().use(html()).get(
 
                             valueField.innerText = '';
 
-                            const userNumber = await fetch("https://${process.env.HOST}/v1/endpoint")
+                            const userNumber = await fetch("https://${
+															process.env.HOST
+														}/v1/endpoint")
                                 .then(res => res.json());
 
-                            valueField.innerText = JSON.stringify(userNumber) || 'NULL';
+                            valueField.innerText = JSON.stringify(userNumber);
                         });
                     });
                 </script>
